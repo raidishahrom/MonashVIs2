@@ -1,0 +1,95 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://raw.githubusercontent.com/raidishahrom/Monash-Vis/main/Data/world_data_2023.csv"
+    }, 
+    "height": 350, 
+    "width": "container",
+  
+    "transform": [
+      {
+        "aggregate": [
+          {"op": "count", "field": "Official_Language", "as": "Language_Count"}
+        ],
+        "groupby": ["Official_Language"]
+      },
+      {"filter": "datum.Language_Count > 2"},
+      {"filter": {"not": {"field": "Official_Language", "equal": "None"}}}
+    ],
+  
+    "layer": [
+      {
+        "params": [
+          {
+            "name": "highlight",
+            "select": 
+            {
+              "type": "point",
+              "on": "mouseover"
+            }
+          },
+          {"name": "select", "select": "point"}
+        ],
+        "mark": {"type": "arc", "innerRadius": 30, "stroke": "white"}
+      },
+      {
+        "mark": 
+          {
+            "type": "text", 
+            "radiusOffset": 13,
+            "fontSize": 14
+          },
+          "encoding": 
+          {
+            "text": {"field": "Language_Count", "type": "quantitative"}
+          }
+     }
+    ],
+    "encoding": {
+      "theta": {"field": "Language_Count", "type": "quantitative", "stack": true},
+      "radius": {"field": "Language_Count", "scale": {"type": "sqrt", "zero": true, "rangeMin": 30}},
+      "color": {
+        "field": "Official_Language", 
+        "title": "Official Languages",
+        "type": "nominal"
+      },
+      "fillOpacity": {
+        "condition": {"param": "select", "value": 1},
+        "value": 0.3
+      },
+        "strokeWidth": {
+            "condition": [
+                {
+                    "param": "highlight",
+                    "empty": false,
+                    "value": 5
+                },
+                {
+                  "param": "select",
+                  "empty": false,
+                  "value": 2
+                }
+            ], 
+            "value": 1
+        },
+  
+      "tooltip": 
+      [
+        {"field": "Official_Language", "type": "nominal", "title": "Official Language "},
+        {"field": "Language_Count", "type": "quantitative", "title": "Number of Countries "}
+  
+      ]
+    },
+    "config": {
+      "view": {"stroke": "transparent"},
+      "legend": {
+        "offset": -20, 
+        "titleFontSize": 14,
+        "labelFontSize": 13,
+        "clipHeight": 15
+      },
+      "background": "#FFFDF4"
+    }
+}
+  
+  

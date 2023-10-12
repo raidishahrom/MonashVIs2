@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>FIT3179 Data Visualization 2</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="Vis/styles.css" media="all">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>World Data 2023</h1>
+        <p id="introText">This visualization seeks to inform the viewer regarding world data using visualizations</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2 id="reg_h">Infant Mortality of the World per 1000</h2>
+        <div id="chloropeth_map" class="vis-container"></div>
+        <p>The chloropeth map above shows the differences in infant mortality rates around the world. </p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h2 id="reg_h">Birth Rate vs. Infant Mortality of Each Country</h2>
+        <div id="scatter_plot" class="vis-container"></div>
+        <p>This visualization shows a scatterplot of Birth Rate against Infant Mortality for each country. Furthermore, a filter is provided to filter through continent.</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div>
+          <h2 id="reg_h">Languages of the World</h2>
+          <div id="radial" class="vis-container"></div>
+          <p>The visualization above shows the top languages used around the world</p>
+        </div>
+      </div>
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div>
+          <h2 id="reg_h">Tertiary % vs Primary Enrollment % and Unemployment Rate %</h2>
+          
+          <div id="bubble" class="vis-container"></div>
+          <p>The above visualization shows a bubble graph with the tertiary and primary enrollment percentages of each country, alongside the size of the bubble chart determined by the countries unemployement rate</p>
+        </div>
+      </div>
+
+        
+      </div>
+    </div>
+    <!-- end pure grid group -->
+
+
+
+  
+
+
+
+
+
+
+
+
+  </div> <!-- end page -->
+
+
+
+
+  <script type="text/javascript">
+
+    var vis1 = "Vis/map_vg.json";
+    var vis2 = "Vis/scatter_plot_vg.json";
+    var vis3 = "Vis/radial_vg.json";
+    var vis4 = "Vis/bubble_chart_vg.json";
+    var vis5 = "js/idiom5_vg.json";
+    var vis6 = "js/idiom6_vg.json";
+
+    vegaEmbed('#chloropeth_map', vis1, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#scatter_plot', vis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#radial', vis3, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#bubble', vis4, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+  </script>
+
+
+</body>
+
+</html>

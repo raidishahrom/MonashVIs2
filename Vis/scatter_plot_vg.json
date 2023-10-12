@@ -1,0 +1,165 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 450,
+    "data": {
+      "url": "https://raw.githubusercontent.com/raidishahrom/Monash-Vis/main/Data/world_data_2023.csv"
+    },
+    "params": [
+      {
+        "name": "Continent_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null, 
+            "Africa",
+            "Central America and the Caribbean",
+            "Central Asia",
+            "East Asia",
+            "Europe",
+            "Middle East",
+            "North America",
+            "Oceania",
+            "South America",
+            "South Asia",
+            "Southeast Asia"
+          ],
+          "labels": [
+            "Show All",
+            "Africa",
+            "Central America and the Caribbean",
+            "Central Asia",
+            "East Asia",
+            "Europe",
+            "Middle East",
+            "North America",
+            "Oceania",
+            "South America",
+            "South Asia",
+            "Southeast Asia"
+          ],
+          "name": "Continent Selection: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+      },
+      {"filter": {"not": {"field": "Unemployment_Rate", "equal": ""}}}
+    ],
+    "encoding": {
+      "x": {
+        "field": "Birth_Rate",
+        "type": "quantitative",
+        "title": "Birth Rate",
+        "axis": {
+          "tickCount": 15,
+          "titleFontSize": 14,
+          "titlePadding": 20,
+          "labelFontSize": 13
+        }
+      },
+      "y": {
+        "field": "Infant_Mortality",
+        "type": "quantitative",
+        "title": "Infant Mortality",
+        "axis": {
+          "tickCount": 10,
+          "titleFontSize": 14,
+          "titlePadding": 15,
+          "labelFontSize": 13
+        }
+      }
+    },
+    "layer": [
+      {
+        "mark": 
+          {
+            "type": "circle",
+            "size": 130
+          },
+        "encoding": {
+          "color": {
+            "field": "Continent",
+            "type": "nominal",
+            "scale": {
+              "domain": [
+                "Africa",
+                "Central America and the Caribbean",
+                "Central Asia",
+                "East Asia",
+                "Europe",
+                "Middle East",
+                "North America",
+                "Oceania",
+                "South America",
+                "South Asia",
+                "Southeast Asia"
+              ],
+              "range": [
+                "#3b6691", 
+                "#736ca3", 
+                "#ac6ea6", 
+                "#da7397", 
+                "#fc9783", 
+                "#f88380", 
+                "#f7bd5e", 
+                "#ee924c", 
+                "#ec734e", 
+                "#de5b4e",  
+                "#cc4349" ]
+            }, 
+            "legend": 
+            {
+              "titleFontSize": 13, 
+              "labelFontSize": 12,
+              "orient": "none",
+              "legendX": 40,
+              "legendY": 20,
+              "clipHeight": 15
+            }
+  
+          },
+          "opacity": {"value": 0.8},
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Continent", "type": "nominal"},
+            {"field": "Birth_Rate", "type": "quantitative", "title": "Birth Rate % "},
+            {"field": "Infant_Mortality", "type": "quantitative", "title": "Infant Mortality Rate % "}
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -10,
+          "fontSize": 12,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "Country", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": "datum.Country == 'Niger' ||datum.Country  == 'Central African Rep.' || datum.Country  == 'Mongolia' || datum.Country  == 'Israel' || datum.Country  == 'Solomon Islands' || datum.Country  == 'Dominican Republic' ||  datum.Country  == 'Spain' || datum.Country == 'Myanmar' || datum.Country == 'Mauritius' || datum.Country == 'Tajikistan' || datum.Country == 'Mexico' || datum.Country == 'Venezuela' || datum.Country == 'Pakistan'",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Continent", "type": "nominal"},
+            {"field": "Birth_Rate", "type": "quantitative", "title": "Birth Rate % "},
+            {"field": "Infant_Mortality", "type": "quantitative", "title": "Infant Mortality Rate % "}
+          ]
+        }
+      }
+    ], 
+    "config": {
+      "view": {"stroke": "transparent"},
+      "background": "#FFFDF4"
+    }
+  }
